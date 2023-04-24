@@ -74,7 +74,7 @@ def main():
     parser.add_argument('--model', help='Name of the audio classification model.',
                         required=False, default='yamnet.tflite')
     parser.add_argument(
-        '--maxResults', help='Maximum number of results to show.', required=False, default=5)
+        '--maxResults', help='Maximum number of results to show.', required=False, default=2)
     parser.add_argument('--overlappingFactor',
                         help='Target overlapping between adjacent inferences. Value must be in (0, 1)', required=False, default=0.5)
     parser.add_argument(
