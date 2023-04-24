@@ -43,9 +43,10 @@ def run(model: str, max_results: int, score_threshold: float,
         raise ValueError(
             'Score threshold must be between (inclusive) 0 and 1.')
 
-    # Initialize the audio classification model.
     base_options = core.BaseOptions(
         file_name=model, use_coral=enable_edgetpu, num_threads=num_threads)
+
+    # Initialize the audio classification model.
     classification_options = processor.ClassificationOptions(
         max_results=max_results, score_threshold=score_threshold)
     options = audio.AudioClassifierOptions(
