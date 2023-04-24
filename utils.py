@@ -1,7 +1,10 @@
 import sys
 
 from matplotlib import rcParams
+from translate import Translator
 import matplotlib.pyplot as plt
+
+translator = Translator(to_lang="pt-BR")
 
 rcParams.update({
     # Set the plot left margin so that the labels are visible.
@@ -34,6 +37,13 @@ class Plotter(object):
     # TODO(khanhlvg): Add type hint for result once ClassificationResult added
     # to tflite_support.task.processor module
     def plot(self, result) -> None:
+        def translateText(text_label):
+            return translator.translate(text_label)
+        def printScore(label_list_array, score_list_array):
+            lengthArray = len(label_list_array)
+            for i in range(lengthArray):
+                print("A categoria:", label_list_array[i], " Está com Score:", score_list_array[i])
+
         """Plot the audio classification result.
 
         Args:
@@ -47,10 +57,9 @@ class Plotter(object):
 
         # Plot the results so that the most probable category comes at the top.
         classification = result.classifications[0]
-        label_list = [
-            category.category_name for category in classification.categories
-        ]
-        score_list = [category.score for category in classification.categories]
+        label_list = [ translateText(category.category_name) for category in classification.categories ]
+        score_list = [ category.score for category in classification.categories ]
+        printScore(label_list[::-1], score_list[::-1])
         self._axes.barh(label_list[::-1], score_list[::-1])
 
         # Wait for the UI event.
