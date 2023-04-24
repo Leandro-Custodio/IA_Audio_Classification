@@ -29,11 +29,11 @@ def run(model: str, max_results: int, score_threshold: float,
 
     Args:
         model: Name of the TFLite audio classification model.
-      max_results: Maximum number of classification results to display.
-      score_threshold: The score threshold of classification results.
-      overlapping_factor: Target overlapping between adjacent inferences.
-      num_threads: Number of CPU threads to run the model.
-      enable_edgetpu: Whether to run the model on EdgeTPU.
+        max_results: Maximum number of classification results to display.
+        score_threshold: The score threshold of classification results.
+        overlapping_factor: Target overlapping between adjacent inferences.
+        num_threads: Number of CPU threads to run the model.
+        enable_edgetpu: Whether to run the model on EdgeTPU.
     """
 
     if (overlapping_factor <= 0) or (overlapping_factor >= 1.0):
