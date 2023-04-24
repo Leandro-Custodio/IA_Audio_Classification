@@ -41,28 +41,6 @@ class Plotter(object):
                 print(
                     "A categoria:", label_list_array[i], " Está com Score:", score_list_array[i])
 
-        """Plot the audio classification result.
-
-        Args:
-            result: Classification results returned by an audio classification
-            model.
-        """
-        # Clear the axes
-        self._axes.cla()
-        self._axes.set_title('O Audio é:')
-        self._axes.set_xlim((0, 1))
-
-        # Plot the results so that the most probable category comes at the top.
-        classification = result.classifications[0]
-        label_list = [translateText(category.category_name)
-                      for category in classification.categories]
-        score_list = [category.score for category in classification.categories]
-        printScore(label_list[::-1], score_list[::-1])
-        self._axes.barh(label_list[::-1], score_list[::-1])
-
-        # Wait for the UI event.
-        plt.pause(self._PAUSE_TIME)
-
         def translateText(text_label):
             dictionaryClassName = {
                 "Speech": "Discurso",
@@ -591,3 +569,24 @@ class Plotter(object):
                 return "Não identificado"
             else:
                 return dictionaryClassName[text_label]
+        """Plot the audio classification result.
+
+        Args:
+            result: Classification results returned by an audio classification
+            model.
+        """
+        # Clear the axes
+        self._axes.cla()
+        self._axes.set_title('O Audio é:')
+        self._axes.set_xlim((0, 1))
+
+        # Plot the results so that the most probable category comes at the top.
+        classification = result.classifications[0]
+        label_list = [translateText(category.category_name)
+                      for category in classification.categories]
+        score_list = [category.score for category in classification.categories]
+        printScore(label_list[::-1], score_list[::-1])
+        self._axes.barh(label_list[::-1], score_list[::-1])
+
+        # Wait for the UI event.
+        plt.pause(self._PAUSE_TIME)
